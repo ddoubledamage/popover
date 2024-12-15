@@ -4,25 +4,25 @@ import jest from "eslint-plugin-jest";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
 export default [
-    {
-        languageOptions: { globals: { ...globals.browser, ...globals.node } },
+  {
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+  },
+  pluginJs.configs.recommended,
+  eslintPluginPrettierRecommended,
+  {
+    rules: {
+      "no-unused-vars": "warn",
     },
-    pluginJs.configs.recommended,
-    eslintPluginPrettierRecommended,
-    {
-        rules: {
-            "no-unused-vars": "warn",
-        },
+  },
+  {
+    ignores: ["dist/*"],
+  },
+  {
+    files: ["**/*.test.js"],
+    ...jest.configs["flat/recommended"],
+    rules: {
+      ...jest.configs["flat/recommended"].rules,
+      "jest/prefer-expect-assertions": "off",
     },
-    {
-        ignores: ["dist/*"],
-    },
-    {
-        files: ["**/*.test.js"],
-        ...jest.configs["flat/recommended"],
-        rules: {
-            ...jest.configs["flat/recommended"].rules,
-            "jest/prefer-expect-assertions": "off",
-        },
-    },
+  },
 ];
